@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class UrlForm extends Component {
   constructor(props) {
-    super();
-    this.props = props;
+    super(props);
+    // this.props = props;
     this.state = {
       title: '',
       urlToShorten: ''
@@ -14,8 +14,16 @@ class UrlForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  //happens on click
+
   handleSubmit = e => {
     e.preventDefault();
+
+    let newPost= {
+      title: this.state.title,
+      urlToShorten: this.state.urlToShorten,
+    }
+    this.props.getNewUrl(newPost);
     this.clearInputs();
   }
 
@@ -27,6 +35,7 @@ class UrlForm extends Component {
     return (
       <form>
         <input
+        data-cy="title-input"
           type='text'
           placeholder='Title...'
           name='title'
@@ -35,14 +44,15 @@ class UrlForm extends Component {
         />
 
         <input
+        data-cy="url-input"
           type='text'
           placeholder='URL to Shorten...'
-          name='title'
-          value={this.state.title}
+          name='urlToShorten'
+          value={this.state.urlToShorten}
           onChange={e => this.handleNameChange(e)}
         />
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button data-cy="submit-button" onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
       </form>

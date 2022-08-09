@@ -4,7 +4,7 @@ import './UrlContainer.css';
 const UrlContainer = props => {
   const urlEls = props.urls.map(url => {
     return (
-      <div className="url">
+      <div data-cy="url" className="url">
         <h3>{url.title}</h3>
         <a href={url.short_url} target="blank">{url.short_url}</a>
         <p>{url.long_url}</p>
@@ -13,7 +13,7 @@ const UrlContainer = props => {
   });
 
   return (
-    <section>
+    <section data-cy="url-holder">
       { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> }
     </section>
   )
