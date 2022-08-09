@@ -19,6 +19,7 @@ export class App extends Component {
       .then(data => {
         this.setState({urls: data.urls})
       })
+      .catch(() => this.setState({error: "Hmmm, we're having trouble loading your data. Please try again later."}))
   }
 
   getNewUrl= (newPost) => {
@@ -40,7 +41,6 @@ export class App extends Component {
     })
   }
 
-
   render() {
     return (
       <main className="App">
@@ -48,7 +48,7 @@ export class App extends Component {
           <h1 data-cy="title">URL Shortener</h1>
           <UrlForm getNewUrl={this.getNewUrl}/>
         </header>
-
+      <div> {this.state.error && <h1>{this.state.error}</h1>} </div>
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
